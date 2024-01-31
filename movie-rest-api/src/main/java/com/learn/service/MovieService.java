@@ -1,7 +1,6 @@
 package com.learn.service;
 
 import com.learn.entity.Movie;
-import com.learn.exception.NotFoundException;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDate;

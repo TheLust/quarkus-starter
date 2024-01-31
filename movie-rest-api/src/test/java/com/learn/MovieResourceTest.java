@@ -1,18 +1,15 @@
 package com.learn;
 
+import com.google.inject.Inject;
 import com.learn.dto.response.ExceptionResponse;
 import com.learn.entity.Movie;
 import com.learn.exception.NotFoundException;
 import com.learn.service.MovieService;
-import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectSpy;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
@@ -21,18 +18,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class MovieServiceTest {
+public class MovieResourceTest {
 
-    @InjectMock
+    @Inject
     MovieService movieService;
 
     @BeforeEach
     void setUp() {
-        when(movieService.findAll()).thenReturn(List.of(
-                new Movie(1L, "Inception", "English", "USA", LocalDate.of(2010, 7, 16)),
-                new Movie(2L, "The Godfather", "French", "USA", LocalDate.of(1972, 3, 24)),
-                new Movie(3L, "The Shawshank Redemption", "English", "USA", LocalDate.of(1994, 10, 14))
-        ));
+        when(movieService.findAll()).thenThrow(new RuntimeException("No connection"));
+                //.thenReturn(List.of(
+//                new Movie(1L, "Inception", "English", "USA", LocalDate.of(2010, 7, 16)),
+//                new Movie(2L, "The Godfather", "French", "USA", LocalDate.of(1972, 3, 24)),
+//                new Movie(3L, "The Shawshank Redemption", "English", "USA", LocalDate.of(1994, 10, 14))
+//        ));
     }
 
     @Test

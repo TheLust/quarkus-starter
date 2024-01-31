@@ -10,8 +10,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.List;
-
 @Path(value = "/movies")
 public class MovieResource {
 
